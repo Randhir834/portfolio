@@ -13,7 +13,7 @@
           class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 group"
         >
           <!-- Featured Image -->
-          <div class="relative overflow-hidden h-48 bg-gradient-to-br from-blue-400 to-purple-500">
+          <div class="relative overflow-hidden h-48 bg-gradient-to-br from-secondary via-primary to-accent">
             <div class="absolute inset-0 flex items-center justify-center">
               <svg class="w-20 h-20 text-white opacity-50" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"/>
@@ -56,7 +56,7 @@
               <span 
                 v-for="tag in post.tags" 
                 :key="tag"
-                class="text-xs bg-blue-100 text-primary px-2 py-1 rounded"
+                class="text-xs bg-primary/10 text-primary px-2 py-1 rounded"
               >
                 #{{ tag }}
               </span>
@@ -65,7 +65,7 @@
             <!-- Read More Link -->
             <a 
               href="#" 
-              class="inline-flex items-center text-primary font-semibold hover:text-blue-700 transition-colors duration-300"
+              class="inline-flex items-center text-primary font-semibold hover:text-accent transition-colors duration-300"
             >
               Read More
               <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">

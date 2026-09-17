@@ -23,7 +23,7 @@
                   <span 
                     v-for="tech in item.technologies" 
                     :key="tech"
-                    class="bg-blue-50 text-primary px-2 py-1 rounded text-xs font-medium border border-blue-100"
+                    class="bg-primary/5 text-primary px-2 py-1 rounded text-xs font-medium border border-primary/15"
                   >
                     {{ tech }}
                   </span>

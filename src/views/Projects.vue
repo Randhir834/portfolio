@@ -1,14 +1,16 @@
 <template>
   <div class="projects-page pt-20">
-    <section class="py-20 bg-gradient-to-r from-blue-600 to-blue-800 text-white">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h1 class="text-5xl font-bold mb-4">My Projects</h1>
-        <p class="text-xl text-blue-100">Explore my portfolio of web applications and designs</p>
-      </div>
-    </section>
-    
     <section class="py-20 bg-gray-50">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <div class="inline-block">
+            <span class="text-sm font-semibold text-primary uppercase tracking-wider mb-2 block">
+              My Work
+            </span>
+            <h2 class="section-title">Projects</h2>
+          </div>
+        </div>
+
         <!-- Filter Buttons -->
         <div class="flex flex-wrap justify-center gap-4 mb-12">
           <button 
@@ -71,16 +73,16 @@ export default {
         id: 2,
         title: 'MindOne - Document Collaboration Platform',
         description: 'Created a real-time collaboration platform with Next.js, Node.js, and MongoDB supporting simultaneous document editing with JWT authentication.',
-        image: 'https://via.placeholder.com/800x500/EEF2FF/1F2937?text=MindOne',
+        image: require('@/assets/mindone.png'),
         technologies: ['Next.js', 'Node.js', 'Express', 'MongoDB', 'Mongoose'],
         category: 'Full Stack',
-        github: 'https://github.com/randhirkumar65',
+        github: 'https://github.com/Randhir834/backend-mindone',
         link: '#'
       },
       {
         id: 3,
         title: 'MovieTicket - Online Booking Platform',
-        description: 'Developed a movie ticket booking system with React, React Router, and Context API. Implemented seat selection, authentication, and payment processing.',
+        description: 'Developed a movie ticket booking system with React, React Router, and Context API. Implemented seat selection, authentication, secure payment processing, and real-time updates.',
         image: require('@/assets/movieticket.png'),
         technologies: ['React.js', 'React Router', 'Context API', 'Tailwind CSS', 'Netlify'],
         category: 'Web Apps',
@@ -98,22 +100,12 @@ export default {
         link: '#'
       },
       {
-        id: 5,
-        title: 'Railway Chatbot (CRIS)',
-        description: 'Product-grade intelligent chatbot for Indian Railways with 85%+ intent recognition accuracy. Optimized NLP models and response time by 30%.',
-        image: '../assets/project-screenshot.png',
-        technologies: ['Python', 'NLP', 'Rasa', 'ML'],
+        id: 7,
+        title: 'AI Career Navigator',
+        description: 'AI-powered resume analyzer with ATS scoring, skill-gap insights, and personalized career roadmaps for smarter transitions.',
+        image: require('@/assets/career.png'),
+        technologies: ['FastAPI', 'Supabase (PostgreSQL)', 'Next.js', 'React', 'TypeScript', 'Axios'],
         category: 'AI/ML',
-        github: '#',
-        link: '#'
-      },
-      {
-        id: 6,
-        title: 'B2B Mobile App (Optare)',
-        description: 'Scalable B2B mobile app using Flutter and Firebase, adopted by 3+ enterprise clients. Automated log collection reducing manual effort by 40%.',
-        image: '../assets/project-screenshot.png',
-        technologies: ['Flutter', 'Firebase', 'Node.js', 'Dash'],
-        category: 'Full Stack',
         github: '#',
         link: '#'
       }

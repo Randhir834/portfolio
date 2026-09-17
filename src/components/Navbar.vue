@@ -1,7 +1,8 @@
 <template>
   <nav 
     :class="[
-      'fixed w-full top-0 z-50 transition-all duration-500',
+      'fixed w-full z-50 transition-all duration-500',
+      isHidden ? '-translate-y-full' : 'translate-y-0',
       scrolled 
         ? 'bg-white/80 backdrop-blur-lg shadow-lg border-b border-gray-200/50' 
         : 'bg-white/95 backdrop-blur-md shadow-md'
@@ -13,9 +14,9 @@
         <div class="flex-shrink-0 group">
           <router-link 
             to="/" 
-            class="flex items-center space-x-3 text-2xl font-bold bg-gradient-to-r from-primary via-blue-600 to-accent bg-clip-text text-transparent hover:scale-105 transition-transform duration-300"
+            class="flex items-center space-x-3 text-2xl font-bold bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent hover:scale-105 transition-transform duration-300"
           >
-            <div class="relative w-12 h-12 rounded-2xl bg-gradient-to-br from-primary via-blue-600 to-accent flex items-center justify-center shadow-lg group-hover:shadow-2xl group-hover:shadow-primary/50 group-hover:rotate-6 transition-all duration-300">
+            <div class="relative w-12 h-12 rounded-2xl bg-gradient-to-br from-secondary via-primary to-accent flex items-center justify-center shadow-lg group-hover:shadow-2xl group-hover:shadow-primary/50 group-hover:rotate-6 transition-all duration-300">
               <span class="text-white text-2xl font-bold">R</span>
               <div class="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </div>
@@ -28,13 +29,10 @@
         
         <!-- Desktop Menu -->
         <div class="hidden lg:flex items-center space-x-1">
-          <component
-            :is="item.isRoute ? 'router-link' : 'a'"
+          <router-link
             v-for="item in navItems" 
             :key="item.path"
-            :to="item.isRoute ? item.path : undefined"
-            :href="!item.isRoute ? item.path : undefined"
-            @click="!item.isRoute ? handleNavClick(item) : null"
+            :to="item.path"
             class="relative px-4 py-2.5 text-sm text-gray-700 hover:text-primary transition-all duration-300 font-medium group cursor-pointer"
           >
             <span class="relative z-10 flex items-center space-x-2">
@@ -42,7 +40,7 @@
             </span>
             <!-- Hover background effect only -->
             <span class="absolute inset-0 bg-gradient-to-r from-primary/10 to-accent/10 rounded-xl scale-0 group-hover:scale-100 transition-transform duration-300 ease-out"></span>
-          </component>
+          </router-link>
         </div>
         
         <!-- Mobile Menu Button -->
@@ -82,17 +80,15 @@
       leave-from-class="opacity-100 translate-y-0"
       leave-to-class="opacity-0 -translate-y-4"
     >
-      <div v-if="mobileMenuOpen" class="lg:hidden bg-white/95 backdrop-blur-lg border-t border-gray-200/50 shadow-2xl">
-        <div class="px-4 pt-4 pb-6 space-y-1 max-h-[calc(100vh-80px)] overflow-y-auto">
-          <component
-            :is="item.isRoute ? 'router-link' : 'a'"
+      <div v-if="mobileMenuOpen" class="lg:hidden fixed inset-0 top-20 bg-white/95 backdrop-blur-lg z-40">
+        <div class="h-[calc(100vh-80px)] overflow-y-auto px-4 pt-4 pb-6 space-y-1">
+          <router-link
             v-for="(item, index) in navItems" 
             :key="item.path"
-            :to="item.isRoute ? item.path : undefined"
-            :href="!item.isRoute ? item.path : undefined"
-            @click="item.isRoute ? (mobileMenuOpen = false) : (handleNavClick(item), mobileMenuOpen = false)"
+            :to="item.path"
+            @click="mobileMenuOpen = false"
             class="block px-4 py-3.5 text-gray-700 hover:text-primary hover:bg-gradient-to-r hover:from-primary/10 hover:to-accent/10 rounded-xl transition-all duration-300 font-medium transform hover:translate-x-1 relative cursor-pointer"
-            :class="item.isRoute && $route.path === item.path ? 'bg-gradient-to-r from-primary/10 to-accent/10 text-primary shadow-md' : ''"
+            :class="$route.path === item.path ? 'bg-gradient-to-r from-primary/10 to-accent/10 text-primary shadow-md' : ''"
             :style="{ transitionDelay: `${index * 50}ms` }"
           >
             <div class="flex items-center justify-between">
@@ -106,7 +102,7 @@
                 <span class="text-base">{{ item.name }}</span>
               </div>
               <svg 
-                v-if="item.isRoute && $route.path === item.path"
+                v-if="$route.path === item.path"
                 class="w-5 h-5 transition-all duration-300 opacity-100 scale-100"
                 fill="currentColor" 
                 viewBox="0 0 20 20"
@@ -114,7 +110,7 @@
                 <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
               </svg>
             </div>
-          </component>
+          </router-link>
           
           <!-- Mobile Menu Footer -->
           <div class="pt-4 mt-4 border-t border-gray-200">
@@ -134,27 +130,36 @@ export default {
   setup() {
     const mobileMenuOpen = ref(false)
     const scrolled = ref(false)
+    const isHidden = ref(false)
+    let lastScrollY = 0
     
     const navItems = [
       { name: 'Home', path: '/', icon: 'home', isRoute: true },
-      { name: 'About', path: '#about', icon: 'user', isRoute: false },
-      { name: 'Skills', path: '#skills', icon: 'code', isRoute: false },
-      { name: 'Experience', path: '#experience', icon: 'briefcase', isRoute: false },
+      { name: 'About', path: '/about', icon: 'user', isRoute: true },
+      { name: 'Skills', path: '/skills', icon: 'code', isRoute: true },
+      { name: 'Experience', path: '/experience', icon: 'briefcase', isRoute: true },
       { name: 'Projects', path: '/projects', icon: 'folder', isRoute: true },
       { name: 'Contact', path: '/contact', icon: 'mail', isRoute: true }
     ]
     
-    const handleNavClick = (item) => {
-      if (!item.isRoute && item.path.startsWith('#')) {
-        const element = document.querySelector(item.path)
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY
+      
+      // Always show navbar at the top of the page
+      if (currentScrollY <= 0) {
+        isHidden.value = false
+        scrolled.value = false
+      } else {
+        scrolled.value = true
+        // Hide when scrolling down, show when scrolling up
+        if (currentScrollY > lastScrollY && currentScrollY > 100) {
+          isHidden.value = true
+        } else {
+          isHidden.value = false
         }
       }
-    }
-    
-    const handleScroll = () => {
-      scrolled.value = window.scrollY > 50
+      
+      lastScrollY = currentScrollY
     }
     
     const getIcon = (iconName) => {
@@ -192,9 +197,9 @@ export default {
     return {
       mobileMenuOpen,
       scrolled,
+      isHidden,
       navItems,
       getIcon,
-      handleNavClick
     }
   }
 }

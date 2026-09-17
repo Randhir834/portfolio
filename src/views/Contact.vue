@@ -1,14 +1,7 @@
 <template>
-  <div class="contact-page pt-20">
-    <section class="py-20 bg-gradient-to-r from-blue-600 to-blue-800 text-white">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h1 class="text-5xl font-bold mb-4">Contact Me</h1>
-        <p class="text-xl text-blue-100">Let's work together on your next project</p>
-      </div>
-    </section>
-    
-    <section class="py-20 bg-gray-50">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <div class="contact-page pt-20 flex-grow flex flex-col">
+    <section class="py-20 bg-gray-50 flex-grow flex items-center">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <!-- Contact Information -->
           <div>

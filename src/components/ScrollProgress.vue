@@ -1,7 +1,7 @@
 <template>
   <div class="fixed top-0 left-0 w-full h-1 bg-gray-200 z-50">
     <div 
-      class="h-full bg-gradient-to-r from-primary to-blue-700 transition-all duration-300"
+      class="h-full bg-gradient-to-r from-primary to-accent transition-all duration-300"
       :style="{ width: scrollPercentage + '%' }"
     ></div>
   </div>

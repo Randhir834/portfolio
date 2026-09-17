@@ -1,5 +1,5 @@
 <template>
-  <section id="experience" class="py-20 bg-gradient-to-br from-gray-50 via-white to-blue-50">
+  <section id="experience" class="py-16 sm:py-20 bg-gradient-to-br from-gray-50 via-white to-primary/5">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Section Header -->
       <div class="text-center mb-16">
@@ -9,9 +9,6 @@
           </span>
           <h2 class="section-title">Experience & Education</h2>
         </div>
-        <p class="mt-6 text-lg text-gray-600 max-w-2xl mx-auto">
-          Building expertise through hands-on experience and continuous learning
-        </p>
       </div>
       
       <div class="space-y-16">
@@ -24,27 +21,27 @@
             Work Experience
           </h3>
           
-          <div class="relative border-l-4 border-primary/30 pl-8 space-y-10">
+          <div class="relative border-l-2 sm:border-l-4 border-primary/30 pl-6 sm:pl-8 space-y-10">
             <div 
               v-for="(job, index) in workExperience" 
               :key="index"
               class="relative group"
             >
               <!-- Timeline Dot with Pulse Animation -->
-              <div class="absolute -left-[42px] top-1/2 -translate-y-1/2">
-                <div class="absolute inset-0 w-8 h-8 bg-primary rounded-full animate-ping opacity-20"></div>
-                <div class="relative w-8 h-8 bg-gradient-to-br from-primary to-blue-600 rounded-full border-4 border-white shadow-xl group-hover:scale-125 transition-transform duration-300 flex items-center justify-center">
-                  <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+              <div class="absolute -left-[30px] sm:-left-[42px] top-7 sm:top-1/2 sm:-translate-y-1/2">
+                <div class="absolute inset-0 w-6 h-6 sm:w-8 sm:h-8 bg-primary rounded-full animate-ping opacity-20"></div>
+                <div class="relative w-6 h-6 sm:w-8 sm:h-8 bg-gradient-to-br from-primary to-accent rounded-full border-[3px] sm:border-4 border-white shadow-xl group-hover:scale-125 transition-transform duration-300 flex items-center justify-center">
+                  <svg class="w-3 h-3 sm:w-4 sm:h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd" />
                   </svg>
                 </div>
               </div>
               
               <!-- Content Card -->
-              <div class="bg-white/80 backdrop-blur-sm p-6 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-x-2 border border-gray-100 hover:border-primary/20 group-hover:bg-gradient-to-br group-hover:from-blue-50/50 group-hover:to-white">
+              <div class="bg-white/80 backdrop-blur-sm p-5 sm:p-6 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform sm:hover:-translate-x-2 border border-gray-100 hover:border-primary/20 group-hover:bg-gradient-to-br group-hover:from-primary/5 group-hover:to-white">
                 <div class="flex justify-between items-start mb-3 flex-wrap gap-2">
                   <h4 class="text-xl font-bold text-gray-900 group-hover:text-primary transition-colors duration-300">{{ job.title }}</h4>
-                  <span class="text-xs font-semibold text-white bg-gradient-to-r from-primary to-blue-600 px-4 py-1.5 rounded-full shadow-md">{{ job.period }}</span>
+                  <span class="text-xs font-semibold text-white bg-gradient-to-r from-primary to-accent px-4 py-1.5 rounded-full shadow-md">{{ job.period }}</span>
                 </div>
                 <p class="text-primary font-semibold mb-4 flex items-center">
                   <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -52,12 +49,18 @@
                   </svg>
                   {{ job.company }}
                 </p>
-                <p class="text-gray-700 mb-4 leading-relaxed">{{ job.description }}</p>
+                <p v-if="job.description" class="text-gray-700 mb-4 leading-relaxed">{{ job.description }}</p>
+                <ul v-if="job.highlights" class="text-gray-700 mb-4 space-y-2">
+                  <li v-for="highlight in job.highlights" :key="highlight" class="flex items-start leading-relaxed">
+                    <span class="w-1.5 h-1.5 rounded-full bg-primary mt-2 mr-3 flex-shrink-0"></span>
+                    <span>{{ highlight }}</span>
+                  </li>
+                </ul>
                 <div class="flex flex-wrap gap-2">
                   <span 
                     v-for="tech in job.technologies" 
                     :key="tech"
-                    class="text-xs font-medium bg-gradient-to-r from-blue-50 to-blue-100 text-blue-700 px-3 py-1.5 rounded-lg border border-blue-200 hover:shadow-md transition-all duration-300 hover:scale-105"
+                    class="text-xs font-medium bg-gradient-to-r from-primary/5 to-primary/10 text-secondary px-3 py-1.5 rounded-lg border border-primary/20 hover:shadow-md transition-all duration-300 hover:scale-105"
                   >
                     {{ tech }}
                   </span>
@@ -78,24 +81,24 @@
             Education
           </h3>
           
-          <div class="relative border-l-4 border-accent/30 pl-8 space-y-10">
+          <div class="relative border-l-2 sm:border-l-4 border-accent/30 pl-6 sm:pl-8 space-y-10">
             <div 
               v-for="(edu, index) in education" 
               :key="index"
               class="relative group"
             >
               <!-- Timeline Dot with Pulse Animation -->
-              <div class="absolute -left-[42px] top-1/2 -translate-y-1/2">
-                <div class="absolute inset-0 w-8 h-8 bg-accent rounded-full animate-ping opacity-20"></div>
-                <div class="relative w-8 h-8 bg-gradient-to-br from-accent to-orange-600 rounded-full border-4 border-white shadow-xl group-hover:scale-125 transition-transform duration-300 flex items-center justify-center">
-                  <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+              <div class="absolute -left-[30px] sm:-left-[42px] top-7 sm:top-1/2 sm:-translate-y-1/2">
+                <div class="absolute inset-0 w-6 h-6 sm:w-8 sm:h-8 bg-accent rounded-full animate-ping opacity-20"></div>
+                <div class="relative w-6 h-6 sm:w-8 sm:h-8 bg-gradient-to-br from-accent to-orange-600 rounded-full border-[3px] sm:border-4 border-white shadow-xl group-hover:scale-125 transition-transform duration-300 flex items-center justify-center">
+                  <svg class="w-3 h-3 sm:w-4 sm:h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
                     <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z" />
                   </svg>
                 </div>
               </div>
               
               <!-- Content Card -->
-              <div class="bg-white/80 backdrop-blur-sm p-6 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-x-2 border border-gray-100 hover:border-accent/20 group-hover:bg-gradient-to-br group-hover:from-amber-50/50 group-hover:to-white">
+              <div class="bg-white/80 backdrop-blur-sm p-5 sm:p-6 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform sm:hover:-translate-x-2 border border-gray-100 hover:border-accent/20 group-hover:bg-gradient-to-br group-hover:from-amber-50/50 group-hover:to-white">
                 <div class="flex justify-between items-start mb-3 flex-wrap gap-2">
                   <h4 class="text-xl font-bold text-gray-900 group-hover:text-accent transition-colors duration-300">{{ edu.degree }}</h4>
                   <span class="text-xs font-semibold text-white bg-gradient-to-r from-accent to-orange-600 px-4 py-1.5 rounded-full shadow-md">{{ edu.period }}</span>
@@ -129,12 +132,41 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
+import { useAnimations } from '@/composables/useAnimations'
 
 export default {
   name: 'Experience',
   setup() {
+    let observer = null
+    const { fadeInUp, fadeInLeft, scrollTrigger } = useAnimations()
+
     const workExperience = ref([
+      {
+        title: 'Software Developer',
+        company: 'TPEX Solutions Pvt. Ltd.',
+        period: 'Oct 2025 - Present',
+        description: 'Building cross-platform mobile and web applications at TPEX Solutions, including Swami Vaishnav and TPEx Healthcare. Implementing real-time features and secure authentication using Flutter, Firebase, and a Node.js backend.',
+        technologies: [
+          'Flutter',
+          'MVVM',
+          'Provider',
+          'Deep Linking',
+          'Material Design',
+          'Firebase Auth',
+          'Cloud Firestore',
+          'Firebase Storage',
+          'Cloud Functions',
+          'Firebase Messaging',
+          'Firebase Analytics',
+          'Crashlytics',
+          'Node.js',
+          'Express',
+          'MongoDB',
+          'OTP Auth',
+          'JWT'
+        ]
+      },
       {
         title: 'Software Engineering Intern',
         company: 'Optare Design Systems Pvt. Ltd.',
@@ -148,6 +180,13 @@ export default {
         period: 'Jan 2025 - May 2025',
         description: 'Developed a product-grade intelligent chatbot for Indian Railways, achieving 85%+ intent recognition accuracy. Optimized NLP models and architected scalable pipelines using 50+ utterances and regex patterns.',
         technologies: ['Python', 'NLP', 'ML', 'Rasa']
+      },
+      {
+        title: 'AI Tools and Applications',
+        company: 'Indian Institute Of Information Technology Allahabad · Internship',
+        period: 'Jun 2023 - Jul 2023 · 2 mos',
+        description: 'Worked on multiple projects, learned deep learning concepts, completed machine learning projects, improved Python proficiency, and gained hands-on experience across these areas.',
+        technologies: ['Machine Learning', 'Python', 'scikit-learn', 'Seaborn', 'Streamlit', 'ZenML']
       }
     ])
     
@@ -156,7 +195,7 @@ export default {
         degree: 'B.Tech in CSE',
         institution: 'Sikkim Manipal Institute of Technology',
         period: '2021 - 2025',
-        description: 'Pursuing Bachelor of Technology with focus on software engineering, web development, and artificial intelligence.',
+        description: 'Completed Bachelor of Technology with focus on software engineering, web development, and artificial intelligence.',
         achievements: [
           'CGPA: 8.0/10',
           'Solved 350+ problems on LeetCode',
@@ -197,6 +236,39 @@ export default {
         ]
       }
     ])
+    
+    onMounted(() => {
+      // Animate section header
+      observer = scrollTrigger('section#experience .section-title', (element) => {
+        fadeInUp(element, 0)
+      })
+
+      // Animate work experience section
+      scrollTrigger('section#experience h3:first-of-type', (element) => {
+        fadeInLeft(element, 0)
+      })
+
+      // Animate work experience cards
+      scrollTrigger('.relative.border-l-2.border-primary\\/30 .relative.group', (element) => {
+        fadeInLeft(element, 0)
+      }, { threshold: 0.2 })
+
+      // Animate education section
+      scrollTrigger('section#experience h3:last-of-type', (element) => {
+        fadeInLeft(element, 0)
+      })
+
+      // Animate education cards
+      scrollTrigger('.relative.border-l-2.border-accent\\/30 .relative.group', (element) => {
+        fadeInLeft(element, 0)
+      }, { threshold: 0.2 })
+    })
+
+    onUnmounted(() => {
+      if (observer) {
+        observer.disconnect()
+      }
+    })
     
     return {
       workExperience,

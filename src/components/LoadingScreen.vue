@@ -1,27 +1,22 @@
 <template>
   <transition name="fade">
-    <div v-if="isLoading" class="fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-br from-primary to-blue-800">
-      <div class="text-center">
-        <!-- Animated Logo/Icon -->
-        <div class="mb-8 animate-bounce-slow">
-          <svg class="w-24 h-24 mx-auto text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
-          </svg>
-        </div>
-        
-        <!-- Loading Text -->
-        <h2 class="text-3xl font-bold text-white mb-4">Loading Portfolio</h2>
-        
-        <!-- Loading Bar -->
-        <div class="w-64 h-2 bg-blue-900 rounded-full overflow-hidden mx-auto">
-          <div class="h-full bg-white rounded-full animate-loading-bar"></div>
-        </div>
-        
-        <!-- Dots Animation -->
-        <div class="flex justify-center mt-6 space-x-2">
-          <div class="w-3 h-3 bg-white rounded-full animate-pulse" style="animation-delay: 0s"></div>
-          <div class="w-3 h-3 bg-white rounded-full animate-pulse" style="animation-delay: 0.2s"></div>
-          <div class="w-3 h-3 bg-white rounded-full animate-pulse" style="animation-delay: 0.4s"></div>
+    <div v-if="isLoading" class="fixed inset-0 z-50">
+      <div class="absolute inset-0 bg-secondary"></div>
+
+      <img
+        :src="splashSrc"
+        alt="Portfolio loading"
+        class="absolute inset-0 w-full h-full object-cover"
+      />
+
+      <div class="absolute inset-0 bg-gradient-to-b from-secondary/80 via-secondary/55 to-secondary/85"></div>
+
+      <div class="relative h-full w-full flex items-center justify-center px-6">
+        <div class="w-full max-w-xl text-center">
+          <div class="mx-auto w-16 h-1.5 rounded-full bg-white/20 overflow-hidden">
+            <div class="h-full bg-accent rounded-full animate-loading-bar"></div>
+          </div>
+          <div class="mt-5 text-white/85 text-sm tracking-wider">Loading</div>
         </div>
       </div>
     </div>
@@ -29,22 +24,56 @@
 </template>
 
 <script>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 
 export default {
   name: 'LoadingScreen',
-  setup() {
+  emits: ['done'],
+  setup(props, { emit }) {
     const isLoading = ref(true)
+    const splashSrc = require('../assets/main.avif')
+
+    const lockScroll = () => {
+      document.documentElement.style.overflow = 'hidden'
+      document.body.style.overflow = 'hidden'
+      document.body.style.touchAction = 'none'
+    }
+
+    const unlockScroll = () => {
+      document.documentElement.style.overflow = ''
+      document.body.style.overflow = ''
+      document.body.style.touchAction = ''
+    }
     
     onMounted(() => {
-      // Simulate loading time
-      setTimeout(() => {
-        isLoading.value = false
-      }, 1500)
+      lockScroll()
+      const minDurationMs = 1100
+      const start = Date.now()
+
+      const img = new Image()
+      img.src = splashSrc
+
+      const finish = () => {
+        const elapsed = Date.now() - start
+        const remaining = Math.max(0, minDurationMs - elapsed)
+        window.setTimeout(() => {
+          isLoading.value = false
+          unlockScroll()
+          emit('done')
+        }, remaining)
+      }
+
+      img.onload = finish
+      img.onerror = finish
+    })
+
+    onUnmounted(() => {
+      unlockScroll()
     })
     
     return {
-      isLoading
+      isLoading,
+      splashSrc
     }
   }
 }

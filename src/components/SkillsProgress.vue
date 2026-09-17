@@ -2,13 +2,13 @@
   <section class="py-20 bg-gray-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-4xl md:text-5xl font-bold text-center text-gray-900 mb-3">Skills & Technologies</h2>
-      <div class="w-24 h-1 bg-gradient-to-r from-primary to-blue-600 mx-auto mb-16"></div>
+      <div class="w-24 h-1 bg-gradient-to-r from-primary to-accent mx-auto mb-16"></div>
       
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         <!-- Frontend Card -->
         <div class="bg-white rounded-2xl shadow-lg p-8 hover:shadow-xl transition-shadow duration-300 border border-gray-100">
           <div class="flex items-center mb-6">
-            <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mr-4">
+            <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mr-4">
               <svg class="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"/>
               </svg>
@@ -24,7 +24,7 @@
               </div>
               <div class="w-full bg-gray-100 rounded-full h-2.5 overflow-hidden">
                 <div 
-                  class="bg-gradient-to-r from-blue-500 to-blue-600 h-full rounded-full transition-all duration-1000 ease-out shadow-sm"
+                  class="bg-gradient-to-r from-primary to-accent h-full rounded-full transition-all duration-1000 ease-out shadow-sm"
                   :style="{ width: isVisible ? skill.level + '%' : '0%' }"
                 ></div>
               </div>
@@ -35,7 +35,7 @@
         <!-- Backend Card -->
         <div class="bg-white rounded-2xl shadow-lg p-8 hover:shadow-xl transition-shadow duration-300 border border-gray-100">
           <div class="flex items-center mb-6">
-            <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mr-4">
+            <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mr-4">
               <svg class="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M3 12v3c0 1.657 3.134 3 7 3s7-1.343 7-3v-3c0 1.657-3.134 3-7 3s-7-1.343-7-3z"/>
                 <path d="M3 7v3c0 1.657 3.134 3 7 3s7-1.343 7-3V7c0 1.657-3.134 3-7 3S3 8.657 3 7z"/>
@@ -53,7 +53,7 @@
               </div>
               <div class="w-full bg-gray-100 rounded-full h-2.5 overflow-hidden">
                 <div 
-                  class="bg-gradient-to-r from-blue-500 to-blue-600 h-full rounded-full transition-all duration-1000 ease-out shadow-sm"
+                  class="bg-gradient-to-r from-primary to-accent h-full rounded-full transition-all duration-1000 ease-out shadow-sm"
                   :style="{ width: isVisible ? skill.level + '%' : '0%' }"
                 ></div>
               </div>
@@ -64,7 +64,7 @@
         <!-- Tools & Others Card -->
         <div class="bg-white rounded-2xl shadow-lg p-8 hover:shadow-xl transition-shadow duration-300 border border-gray-100">
           <div class="flex items-center mb-6">
-            <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mr-4">
+            <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mr-4">
               <svg class="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/>
               </svg>
@@ -80,7 +80,7 @@
               </div>
               <div class="w-full bg-gray-100 rounded-full h-2.5 overflow-hidden">
                 <div 
-                  class="bg-gradient-to-r from-blue-500 to-blue-600 h-full rounded-full transition-all duration-1000 ease-out shadow-sm"
+                  class="bg-gradient-to-r from-primary to-accent h-full rounded-full transition-all duration-1000 ease-out shadow-sm"
                   :style="{ width: isVisible ? skill.level + '%' : '0%' }"
                 ></div>
               </div>

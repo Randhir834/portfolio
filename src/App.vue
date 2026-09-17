@@ -1,16 +1,18 @@
 <template>
   <div id="app">
-    <LoadingScreen />
-    <Navbar />
-    <main>
-      <router-view v-slot="{ Component }">
-        <transition name="page" mode="out-in">
-          <component :is="Component" />
-        </transition>
-      </router-view>
-    </main>
-    <Footer />
-    <ScrollToTop />
+    <LoadingScreen v-if="isAppLoading" @done="isAppLoading = false" />
+    <template v-else>
+      <Navbar />
+      <main :style="{ minHeight: $route.path === '/' ? 'calc(100vh - 80px)' : '100vh' }" class="flex flex-col flex-grow">
+        <router-view v-slot="{ Component }">
+          <transition name="page" mode="out-in">
+            <component :is="Component" class="flex-grow" />
+          </transition>
+        </router-view>
+      </main>
+      <Footer v-if="$route.path === '/'" :showConnect="false" />
+      <ScrollToTop />
+    </template>
   </div>
 </template>
 
@@ -19,6 +21,9 @@ import Navbar from './components/Navbar.vue'
 import Footer from './components/Footer.vue'
 import ScrollToTop from './components/ScrollToTop.vue'
 import LoadingScreen from './components/LoadingScreen.vue'
+import { ref, watch, nextTick } from 'vue'
+import { useRoute } from 'vue-router'
+import { animate } from 'animejs'
 
 export default {
   name: 'App',
@@ -27,6 +32,27 @@ export default {
     Footer,
     ScrollToTop,
     LoadingScreen
+  },
+  setup() {
+    const isAppLoading = ref(true)
+    const route = useRoute()
+
+    // Page transition animation
+    watch(() => route.path, () => {
+      nextTick(() => {
+        // Animate page content on route change
+        animate('main > div', {
+          opacity: [0, 1],
+          translateY: [20, 0],
+          duration: 600,
+          easing: 'out(3)'
+        })
+      })
+    })
+
+    return {
+      isAppLoading
+    }
   }
 }
 </script>
@@ -47,11 +73,6 @@ body {
 
 body::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Opera */
-}
-
-main {
-  min-height: calc(100vh - 80px);
-  padding-top: 0;
 }
 
 /* Page Transitions */
